@@ -2,6 +2,18 @@
 #include <math.h>
 #include <unistd.h>
 
+enum dir {
+	LEFT = -1,
+	RIGHT = 1,
+	FWD = 1,
+	BACK = -1,
+};
+
+enum side {
+	x_side,
+	y_side
+};
+
 typedef struct {
 	float x, y, z;
 } vec3;
@@ -9,6 +21,12 @@ typedef struct {
 typedef struct {
 	float x, y;
 } vec2;
+
+typedef struct {
+	vec2 pos;
+	vec2 dir;
+	vec2 cam;
+} player;
 
 void draw_line(vec3* start, vec3* end) {
 	float dx = end->x - start->x;
