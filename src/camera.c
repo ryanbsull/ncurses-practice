@@ -47,7 +47,7 @@ int map[] = {
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 };
 
-void draw_line(vec3* start, vec3* end) {
+void draw_line(vec2* start, vec2* end) {
 	float dx = end->x - start->x;
 	float dy = end->y - start->y;
 	float len = sqrt(dx*dx + dy*dy);
@@ -59,6 +59,10 @@ void draw_line(vec3* start, vec3* end) {
 		y = (int)(start->y + i * sin(angle)) + 1;
 		mvaddch(y, x, 'x');
 	}
+}
+
+void draw_pojnt(vec2* p) {
+	mvaddch(p->y, p->x, 'x');
 }
 
 int loop() {
