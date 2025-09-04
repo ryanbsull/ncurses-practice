@@ -28,6 +28,8 @@ typedef struct {
 	vec2 cam;
 } player;
 
+player state;
+
 int map[] = {
 		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -69,8 +71,22 @@ int loop() {
 	return 0;
 }
 
-int main() {
+int init() {
 	initscr();
+
+	state.pos.x = 10;
+	state.pos.y = 10;
+	state.dir.x = 1;
+	state.dir.y = 0;
+	// define camera plane where the view will be projected onto
+	state.cam.x = 0;
+	state.cam.y = 0.66;
+
+	return 0;
+}
+
+int main() {
+	init();
 	while(1) {
 		loop();
 		usleep(700);
