@@ -67,6 +67,31 @@ void draw_pojnt(vec2* p) {
 	mvaddch(p->y, p->x, 'x');
 }
 
+void move(player* p, int dir, float speed) {
+	float angle = atan2(p->dir.y, p->dir.x);
+
+	if (map[(int)(p->pos.x + cos(angle) * dir) * 16 + (int)(p->pos.y + sin(angle) * dir)] == 1)
+		return;
+	
+	if (p->pos.x + cos(angle) * dir < 15 && p->pos.x + cos(angle) * dir >= 0.66) {
+		p->pos.x += cos(angle) * dir * speed;
+	}
+	if (p->pos.y + sin(angle) * dir < 15 && p->pos.y + sin(angle) * dir >= 0.66) {
+		p->pos.y += sin(angle) * dir * speed;
+	}
+}
+
+void rotate(player* p, int dir, float speed) {
+	float angle = atan2(p->dir.y, p->dir.x);
+	angle += speed * dir;
+	p->dir.x = cos(angle);
+	p->dir.y = sin(angle);
+	// ensure the camera plane is always perpendicular to our direction vector
+	p->cam.x = -p->dir.y;
+	p->cam.y = p->dir.x;
+}
+
+
 int loop() {
 	return 0;
 }
